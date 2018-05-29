@@ -1,0 +1,14 @@
+        GUILayout.BeginHorizontal();
+        outPutPath = EditorGUILayout.TextField("OutPutPath", outPutPath);
+        PlayerPrefs.SetString(GlobalBuild.CmdArgsKey.OUTPUT_PATH, outPutPath);
+        GlobalBuild.Default.OutputPath = PlayerPrefs.GetString(GlobalBuild.CmdArgsKey.OUTPUT_PATH);
+
+        if (GUILayout.Button("…", EditorStyles.toolbar, GUILayout.Width(30)))
+        {
+            string temp = EditorUtility.OpenFolderPanel("Output Folder", outPutPath, string.Empty);
+            if (!string.IsNullOrEmpty(temp))
+                outPutPath = temp;
+            PlayerPrefs.SetString(GlobalBuild.CmdArgsKey.OUTPUT_PATH, outPutPath);
+            GlobalBuild.Default.OutputPath = PlayerPrefs.GetString(GlobalBuild.CmdArgsKey.OUTPUT_PATH);
+        }
+        GUILayout.EndHorizontal();
